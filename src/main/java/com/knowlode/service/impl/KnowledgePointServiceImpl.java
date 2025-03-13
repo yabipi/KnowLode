@@ -13,7 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,42 +28,44 @@ public class KnowledgePointServiceImpl implements KnowledgePointService {
 
     @Override
     public KnowledgePointDTO createKnowledgePoint(KnowledgePointDTO knowledgePointDTO) {
-        KnowledgePoint knowledgePoint = new KnowledgePoint();
-        BeanUtils.copyProperties(knowledgePointDTO, knowledgePoint, "id", "questions");
-        
-        Category category = categoryRepository.findById(knowledgePointDTO.getCategoryId())
-                .orElseThrow(() -> new EntityNotFoundException("Category not found"));
-        knowledgePoint.setCategory(category);
-
-        if (knowledgePointDTO.getQuestionIds() != null) {
-            List<Question> questions = questionRepository.findAllById(knowledgePointDTO.getQuestionIds());
-            knowledgePoint.setQuestions(questions);
-        }
-
-        knowledgePoint = knowledgePointRepository.save(knowledgePoint);
-        BeanUtils.copyProperties(knowledgePoint, knowledgePointDTO);
-        return knowledgePointDTO;
+        //KnowledgePoint knowledgePoint = new KnowledgePoint();
+        //BeanUtils.copyProperties(knowledgePointDTO, knowledgePoint, "id", "questions");
+        //
+        //Category category = categoryRepository.findById(knowledgePointDTO.getCategoryId())
+        //        .orElseThrow(() -> new EntityNotFoundException("Category not found"));
+        //knowledgePoint.setCategory(category);
+        //
+        //if (knowledgePointDTO.getQuestionIds() != null) {
+        //    List<Question> questions = questionRepository.findAllById(knowledgePointDTO.getQuestionIds());
+        //    knowledgePoint.setQuestions(questions);
+        //}
+        //
+        //knowledgePoint = knowledgePointRepository.save(knowledgePoint);
+        //BeanUtils.copyProperties(knowledgePoint, knowledgePointDTO);
+        //return knowledgePointDTO;
+        return null;
     }
 
     @Override
     public KnowledgePointDTO updateKnowledgePoint(Long id, KnowledgePointDTO knowledgePointDTO) {
-        KnowledgePoint knowledgePoint = knowledgePointRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Knowledge point not found"));
-        
-        BeanUtils.copyProperties(knowledgePointDTO, knowledgePoint, "id", "questions");
-        
-        Category category = categoryRepository.findById(knowledgePointDTO.getCategoryId())
-                .orElseThrow(() -> new EntityNotFoundException("Category not found"));
-        knowledgePoint.setCategory(category);
-
-        if (knowledgePointDTO.getQuestionIds() != null) {
-            List<Question> questions = questionRepository.findAllById(knowledgePointDTO.getQuestionIds());
-            knowledgePoint.setQuestions(questions);
-        }
-
-        knowledgePoint = knowledgePointRepository.save(knowledgePoint);
-        BeanUtils.copyProperties(knowledgePoint, knowledgePointDTO);
-        return knowledgePointDTO;
+        //KnowledgePoint knowledgePoint = knowledgePointRepository.findById(id)
+        //        .orElseThrow(() -> new EntityNotFoundException("Knowledge point not found"));
+        //
+        //BeanUtils.copyProperties(knowledgePointDTO, knowledgePoint, "id", "questions");
+        //
+        //Category category = categoryRepository.findById(knowledgePointDTO.getCategoryId())
+        //        .orElseThrow(() -> new EntityNotFoundException("Category not found"));
+        //knowledgePoint.setCategory(category);
+        //
+        //if (knowledgePointDTO.getQuestionIds() != null) {
+        //    List<Question> questions = questionRepository.findAllById(knowledgePointDTO.getQuestionIds());
+        //    knowledgePoint.setQuestions(questions);
+        //}
+        //
+        //knowledgePoint = knowledgePointRepository.save(knowledgePoint);
+        //BeanUtils.copyProperties(knowledgePoint, knowledgePointDTO);
+        //return knowledgePointDTO;
+        return null;
     }
 
     @Override
@@ -93,26 +95,29 @@ public class KnowledgePointServiceImpl implements KnowledgePointService {
     @Override
     @Transactional(readOnly = true)
     public List<KnowledgePointDTO> getKnowledgePointsByCategory(Long categoryId) {
-        return knowledgePointRepository.findByCategoryId(categoryId).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        //return knowledgePointRepository.findByCategoryId(categoryId).stream()
+        //        .map(this::convertToDTO)
+        //        .collect(Collectors.toList());
+        return null;
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<KnowledgePointDTO> searchKnowledgePoints(String keyword) {
-        return knowledgePointRepository.findByTitleContaining(keyword).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        //return knowledgePointRepository.findByTitleContaining(keyword).stream()
+        //        .map(this::convertToDTO)
+        //        .collect(Collectors.toList());
+        return null;
     }
 
     private KnowledgePointDTO convertToDTO(KnowledgePoint knowledgePoint) {
-        KnowledgePointDTO dto = new KnowledgePointDTO();
-        BeanUtils.copyProperties(knowledgePoint, dto);
-        dto.setCategoryId(knowledgePoint.getCategory().getId());
-        dto.setQuestionIds(knowledgePoint.getQuestions().stream()
-                .map(Question::getId)
-                .collect(Collectors.toList()));
-        return dto;
+        //KnowledgePointDTO dto = new KnowledgePointDTO();
+        //BeanUtils.copyProperties(knowledgePoint, dto);
+        //dto.setCategoryId(knowledgePoint.getCategory().getId());
+        //dto.setQuestionIds(knowledgePoint.getQuestions().stream()
+        //        .map(Question::getId)
+        //        .collect(Collectors.toList()));
+        //return dto;
+        return null;
     }
 } 

@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,12 +15,12 @@ public class KnowledgePointController {
     private final KnowledgePointService knowledgePointService;
 
     @PostMapping
-    public ResponseEntity<KnowledgePointDTO> createKnowledgePoint(@Valid @RequestBody KnowledgePointDTO knowledgePointDTO) {
+    public ResponseEntity<KnowledgePointDTO> createKnowledgePoint(@RequestBody KnowledgePointDTO knowledgePointDTO) {
         return ResponseEntity.ok(knowledgePointService.createKnowledgePoint(knowledgePointDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<KnowledgePointDTO> updateKnowledgePoint(@PathVariable Long id, @Valid @RequestBody KnowledgePointDTO knowledgePointDTO) {
+    public ResponseEntity<KnowledgePointDTO> updateKnowledgePoint(@PathVariable Long id, @RequestBody KnowledgePointDTO knowledgePointDTO) {
         return ResponseEntity.ok(knowledgePointService.updateKnowledgePoint(id, knowledgePointDTO));
     }
 

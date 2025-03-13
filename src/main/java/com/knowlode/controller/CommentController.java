@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,12 +15,12 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping
-    public ResponseEntity<CommentDTO> createComment(@Valid @RequestBody CommentDTO commentDTO) {
+    public ResponseEntity<CommentDTO> createComment(@RequestBody CommentDTO commentDTO) {
         return ResponseEntity.ok(commentService.createComment(commentDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CommentDTO> updateComment(@PathVariable Long id, @Valid @RequestBody CommentDTO commentDTO) {
+    public ResponseEntity<CommentDTO> updateComment(@PathVariable Long id, @RequestBody CommentDTO commentDTO) {
         return ResponseEntity.ok(commentService.updateComment(id, commentDTO));
     }
 

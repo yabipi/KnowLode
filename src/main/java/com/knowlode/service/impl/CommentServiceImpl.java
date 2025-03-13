@@ -13,7 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,19 +27,20 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDTO createComment(CommentDTO commentDTO) {
-        Comment comment = new Comment();
-        BeanUtils.copyProperties(commentDTO, comment, "id");
-
-        User user = userRepository.findById(commentDTO.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
-        comment.setUser(user);
-
-        KnowledgePoint knowledgePoint = knowledgePointRepository.findById(commentDTO.getKnowledgePointId())
-                .orElseThrow(() -> new EntityNotFoundException("Knowledge point not found"));
-        comment.setKnowledgePoint(knowledgePoint);
-
-        comment = commentRepository.save(comment);
-        return convertToDTO(comment);
+        //Comment comment = new Comment();
+        //BeanUtils.copyProperties(commentDTO, comment, "id");
+        //
+        //User user = userRepository.findById(commentDTO.getUserId())
+        //        .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        //comment.setUser(user);
+        //
+        //KnowledgePoint knowledgePoint = knowledgePointRepository.findById(commentDTO.getKnowledgePointId())
+        //        .orElseThrow(() -> new EntityNotFoundException("Knowledge point not found"));
+        //comment.setKnowledgePoint(knowledgePoint);
+        //
+        //comment = commentRepository.save(comment);
+        //return convertToDTO(comment);
+        return null;
     }
 
     @Override
@@ -71,24 +72,27 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional(readOnly = true)
     public List<CommentDTO> getCommentsByKnowledgePoint(Long knowledgePointId) {
-        return commentRepository.findByKnowledgePointId(knowledgePointId).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        //return commentRepository.findByKnowledgePointId(knowledgePointId).stream()
+        //        .map(this::convertToDTO)
+        //        .collect(Collectors.toList());
+        return null;
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CommentDTO> getCommentsByUser(Long userId) {
-        return commentRepository.findByUserId(userId).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        //return commentRepository.findByUserId(userId).stream()
+        //        .map(this::convertToDTO)
+        //        .collect(Collectors.toList());
+        return null;
     }
 
     private CommentDTO convertToDTO(Comment comment) {
-        CommentDTO dto = new CommentDTO();
-        BeanUtils.copyProperties(comment, dto);
-        dto.setUserId(comment.getUser().getId());
-        dto.setKnowledgePointId(comment.getKnowledgePoint().getId());
-        return dto;
+        //CommentDTO dto = new CommentDTO();
+        //BeanUtils.copyProperties(comment, dto);
+        //dto.setUserId(comment.getUser().getId());
+        //dto.setKnowledgePointId(comment.getKnowledgePoint().getId());
+        //return dto;
+        return null;
     }
 } 

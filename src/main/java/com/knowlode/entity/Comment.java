@@ -1,13 +1,11 @@
 package com.knowlode.entity;
 
-import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
 @Entity
 @Table(name = "comments")
 public class Comment {
@@ -18,17 +16,41 @@ public class Comment {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "knowledge_point_id")
-    private KnowledgePoint knowledgePoint;
-
-    @CreationTimestamp
     private LocalDateTime createTime;
 
-    @UpdateTimestamp
     private LocalDateTime updateTime;
-} 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
+}

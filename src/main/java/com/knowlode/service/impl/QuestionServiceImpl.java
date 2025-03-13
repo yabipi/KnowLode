@@ -13,7 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,14 +30,14 @@ public class QuestionServiceImpl implements QuestionService {
         Question question = new Question();
         BeanUtils.copyProperties(questionDTO, question, "id", "knowledgePoints");
         
-        Category category = categoryRepository.findById(questionDTO.getCategoryId())
-                .orElseThrow(() -> new EntityNotFoundException("Category not found"));
-        question.setCategory(category);
-
-        if (questionDTO.getKnowledgePointIds() != null) {
-            List<KnowledgePoint> knowledgePoints = knowledgePointRepository.findAllById(questionDTO.getKnowledgePointIds());
-            question.setKnowledgePoints(knowledgePoints);
-        }
+        //Category category = categoryRepository.findById(questionDTO.getCategoryId())
+        //        .orElseThrow(() -> new EntityNotFoundException("Category not found"));
+        //question.setCategory(category);
+        //
+        //if (questionDTO.getKnowledgePointIds() != null) {
+        //    List<KnowledgePoint> knowledgePoints = knowledgePointRepository.findAllById(questionDTO.getKnowledgePointIds());
+        //    question.setKnowledgePoints(knowledgePoints);
+        //}
 
         question = questionRepository.save(question);
         return convertToDTO(question);
@@ -50,14 +50,14 @@ public class QuestionServiceImpl implements QuestionService {
         
         BeanUtils.copyProperties(questionDTO, question, "id", "knowledgePoints");
         
-        Category category = categoryRepository.findById(questionDTO.getCategoryId())
-                .orElseThrow(() -> new EntityNotFoundException("Category not found"));
-        question.setCategory(category);
-
-        if (questionDTO.getKnowledgePointIds() != null) {
-            List<KnowledgePoint> knowledgePoints = knowledgePointRepository.findAllById(questionDTO.getKnowledgePointIds());
-            question.setKnowledgePoints(knowledgePoints);
-        }
+        //Category category = categoryRepository.findById(questionDTO.getCategoryId())
+        //        .orElseThrow(() -> new EntityNotFoundException("Category not found"));
+        //question.setCategory(category);
+        //
+        //if (questionDTO.getKnowledgePointIds() != null) {
+        //    List<KnowledgePoint> knowledgePoints = knowledgePointRepository.findAllById(questionDTO.getKnowledgePointIds());
+        //    question.setKnowledgePoints(knowledgePoints);
+        //}
 
         question = questionRepository.save(question);
         return convertToDTO(question);
@@ -73,53 +73,65 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     @Transactional(readOnly = true)
-    public QuestionDTO getQuestionById(Long id) {
+    public Question getQuestionById(Long id) {
         Question question = questionRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Question not found"));
-        return convertToDTO(question);
+        return question;
+        //return convertToDTO(question);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<QuestionDTO> getAllQuestions() {
-        return questionRepository.findAll().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    @Transactional(readOnly = true)
     public List<QuestionDTO> getQuestionsByCategory(Long categoryId) {
-        return questionRepository.findByCategoryId(categoryId).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        return List.of();
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<QuestionDTO> searchQuestions(String keyword) {
-        return questionRepository.findByTitleContaining(keyword).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+    public Question saveQuestion(Question question) {
+        return questionRepository.save(question);
     }
+
+    //@Override
+    //@Transactional(readOnly = true)
+    //public List<QuestionDTO> getAllQuestions() {
+    //    return questionRepository.findAll().stream()
+    //            .map(this::convertToDTO)
+    //            .collect(Collectors.toList());
+    //}
+
+    //@Override
+    //@Transactional(readOnly = true)
+    //public List<QuestionDTO> getQuestionsByCategory(Long categoryId) {
+    //    return questionRepository.findByCategoryId(categoryId).stream()
+    //            .map(this::convertToDTO)
+    //            .collect(Collectors.toList());
+    //}
+
+    //@Override
+    //@Transactional(readOnly = true)
+    //public List<Question> searchQuestions(String keyword) {
+    //    return questionRepository.findByTitleContaining(keyword).stream()
+    //            .map(this::convertToDTO)
+    //            .collect(Collectors.toList());
+    //}
 
     @Override
     @Transactional(readOnly = true)
     public List<QuestionDTO> getQuestionsByKnowledgePoint(Long knowledgePointId) {
-        KnowledgePoint knowledgePoint = knowledgePointRepository.findById(knowledgePointId)
-                .orElseThrow(() -> new EntityNotFoundException("Knowledge point not found"));
-        return knowledgePoint.getQuestions().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        //KnowledgePoint knowledgePoint = knowledgePointRepository.findById(knowledgePointId)
+        //        .orElseThrow(() -> new EntityNotFoundException("Knowledge point not found"));
+        //return knowledgePoint.getQuestions().stream()
+        //        .map(this::convertToDTO)
+        //        .collect(Collectors.toList());
+        return null;
     }
 
     private QuestionDTO convertToDTO(Question question) {
         QuestionDTO dto = new QuestionDTO();
         BeanUtils.copyProperties(question, dto);
-        dto.setCategoryId(question.getCategory().getId());
-        dto.setKnowledgePointIds(question.getKnowledgePoints().stream()
-                .map(KnowledgePoint::getId)
-                .collect(Collectors.toList()));
+        //dto.setCategoryId(question.getCategory().getId());
+        //dto.setKnowledgePointIds(question.getKnowledgePoints().stream()
+        //        .map(KnowledgePoint::getId)
+        //        .collect(Collectors.toList()));
         return dto;
     }
 } 
