@@ -10,6 +10,8 @@ import com.knowlode.repository.QuestionRepository;
 import com.knowlode.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -78,6 +80,11 @@ public class QuestionServiceImpl implements QuestionService {
                 .orElseThrow(() -> new EntityNotFoundException("Question not found"));
         return question;
         //return convertToDTO(question);
+    }
+
+    @Override
+    public Page<Question> getQuestions(int pageNo, int pageSize) {
+        return questionRepository.listQuestions(PageRequest.of(pageNo - 1, pageSize));
     }
 
     @Override

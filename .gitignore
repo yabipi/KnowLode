@@ -1,2 +1,7 @@
 build
 *.class
+.idea
+.gradle
+.vscode
+.DS_Store
+.gradle

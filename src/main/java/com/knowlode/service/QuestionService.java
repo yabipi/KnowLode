@@ -4,6 +4,7 @@ import com.knowlode.dto.QuestionDTO;
 import com.knowlode.entity.Question;
 import com.knowlode.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface QuestionService {
 
     public Question getQuestionById(Long id);
 
-    //public List<Question> getAllQuestions();
+    public Page<Question> getQuestions(int pageNo, int pageSize);
 
     //public List<QuestionDTO> getAllQuestions();
     //public Question getQuestionById(Long id);

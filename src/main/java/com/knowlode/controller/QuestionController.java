@@ -3,9 +3,9 @@ package com.knowlode.controller;
 import com.knowlode.entity.Question;
 import com.knowlode.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PagedModel;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/questions")
@@ -15,9 +15,8 @@ public class QuestionController {
     private QuestionService questionService;
 
     @GetMapping
-    public List<Question> getAllQuestions() {
-        //return questionService.getAllQuestions();
-        return null;
+    public PagedModel<Question> getAllQuestions(@RequestParam(value="pageNo") int pageNo, @RequestParam(value="pageSize") int pageSize) {
+        return new PagedModel<>(questionService.getQuestions(pageNo, pageSize));
     }
 
     @GetMapping("/{id}")
@@ -32,7 +31,7 @@ public class QuestionController {
 
     @PutMapping("/{id}")
     public Question updateQuestion(@PathVariable Long id, @RequestBody Question question) {
-        question.setId(id);
+        question.setQuestionId(id);
         return questionService.saveQuestion(question);
     }
 

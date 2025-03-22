@@ -1,0 +1,8 @@
+###
+GET http://localhost:8080/api/questions?pageNo=1&pageSize=10
+
+###
+GET http://localhost:8080/api/quiz/list?pageNo=1&pageSize=10
+
+###
+GET http://localhost:8080/api/quiz/listquestions?quizId=7

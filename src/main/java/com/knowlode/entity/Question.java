@@ -2,22 +2,22 @@ package com.knowlode.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "questions")
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "question_id")
+    private Long questionId;
 
-    @Column(nullable = false)
+    @Column(name="title")
     private String title;
 
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "answer")
     private String answer;
 
 
@@ -30,7 +30,7 @@ public class Question {
     private Long userId;
 
     // 新增字段：问题状态（例如：0-未解决，1-已解决）
-    @Column(nullable = false)
+    @Column(name = "status")
     private Integer status;
 
     // 新增字段：问题标签（例如：Java, Spring, JPA）
@@ -38,23 +38,23 @@ public class Question {
     private String tags;
 
     // 新增字段：问题浏览量
-    @Column(nullable = false)
+    @Column(name = "view_count")
     private Integer viewCount;
 
     // 新增字段：问题点赞数
-    @Column(nullable = false)
+    @Column(name = "like_count")
     private Integer likeCount;
 
     // 新增字段：问题收藏数
-    @Column(nullable = false)
+    @Column(name = "favorite_count")
     private Integer favoriteCount;
 
-    public Long getId() {
-        return id;
+    public Long getQuestionId() {
+        return questionId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setQuestionId(Long id) {
+        this.questionId = id;
     }
 
     public String getTitle() {

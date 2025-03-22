@@ -11,6 +11,24 @@ CREATE TABLE categories (
 );
 
 -- 创建题目信息表
+CREATE TABLE quiz (
+       quiz_id INT AUTO_INCREMENT PRIMARY KEY,
+       title VARCHAR(255) NOT NULL,
+       difficulty_level VARCHAR(50),
+       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+       created_by INT,
+       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+       updated_by INT
+
+);
+
+CREATE TABLE quiz_question (
+    id AUTO_INCREMENT PRIMARY KEY,
+    quiz_id INT,
+    question_id INT
+);
+
+-- 创建题目信息表
 CREATE TABLE questions (
     question_id INT AUTO_INCREMENT PRIMARY KEY,
     question_content TEXT NOT NULL,
